@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{
+  --blue: #646cffaa;
+  --green: #42b883aa;
+  --darkblue: #1e5067;
+  --blackish: #141e26;
+  --whiteish: #cbd8df;
+}
+body{
+  font-family: 'Roboto', sans-serif;
+  background: var(--whiteish);
+}
