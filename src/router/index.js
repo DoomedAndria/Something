@@ -18,5 +18,10 @@ export default createRouter({
             name: "Authorization",
             component: () => import("../views/Authorization.vue")
         },
+        {
+            path: "/dashboard",
+            name: "Dashboard",
+            component: () => import("../views/Dashboard.vue")
+        }
     ],
 })

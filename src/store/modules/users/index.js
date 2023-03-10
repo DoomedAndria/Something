@@ -44,6 +44,9 @@ export default {
             return (id) => {
                 return state.users.find(u => u.id == id)
             }
+        },
+        getToken(state){
+            return state.token
         }
     },
     actions: {

@@ -2,41 +2,52 @@
 import {useStore} from "vuex";
 import {ref} from "vue"
 import axios from "axios";
+import {useRouter} from "vue-router";
 
 const store = useStore()
+const router = useRouter()
 
 const email = ref("")
 const password = ref("")
+const error = ref("")
 
-function changeEmail(e){
+function changeEmail(e) {
+  if(error.value !== "")
+    error.value = ""
   email.value = e.target.value
 }
-function changePassword(e){
+
+function changePassword(e) {
+  if(error.value !== "")
+    error.value = ""
   password.value = e.target.value
-  console.log(import.meta.env.VITE_AUTH_URL)
 }
-function sendRequest(){
+
+function sendRequest() {
   axios
-      .post(import.meta.env.VITE_AUTH_URL,{
+      .post(import.meta.env.VITE_AUTH_URL, {
         email: email.value,
         password: password.value
       })
       .then((result) => {
-        console.log(result)
+        store.commit("users/UPDATE_TOKEN", result.data.token)
+        router.push("/dashboard")
       })
-      .catch(console.error);
+      .catch((err) => {
+        error.value = err.response.data.message
+      });
 }
 </script>
 
 <template>
-  <div class="w-full max-w-xs">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <div class="min-h-screen flex justify-center items-center">
+    <div class="bg-[#e8eef1] shadow-md rounded px-[60px] py-[40px] mb-4">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
           Email
         </label>
         <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-[400px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email" type="email" placeholder="Email"
             @input="changeEmail">
       </div>
@@ -47,8 +58,8 @@ function sendRequest(){
         <input
             class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password" type="password" placeholder="**********"
-            @input="changePassword">>
-        <p class="text-red-500 text-xs italic"></p>
+            @input="changePassword">
+        <p class="text-red-500 text-xs italic">{{ error }}</p>
       </div>
       <div class="flex items-center justify-between">
         <button
@@ -58,7 +69,7 @@ function sendRequest(){
           Sign In
         </button>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
