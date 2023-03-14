@@ -8,8 +8,8 @@ const popType = computed(()=>{
   return store.getters["categories/getPopupType"]
 })
 
-const deleteCategory = ()=>{
-  store.dispatch('categories/deleteCategory')
+const deleteCategory = async ()=>{
+  await store.dispatch('categories/deleteCategory')
   store.commit('categories/TOGGLE_POPUP_OPEN')
   store.dispatch('categories/fetchCategories')
 }

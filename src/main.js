@@ -5,7 +5,7 @@ import store from './store'
 import App from './App.vue'
 
 
-
+console.log(localStorage)
 router.beforeEach((to, from, next) => {
 
     //const isLoggedIn = store.state.users.user

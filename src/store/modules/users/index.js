@@ -5,7 +5,7 @@ export default {
     namespaced: true,
     state() {
         return {
-            user: null,
+            user:null,
             token: null
 
         }
@@ -46,6 +46,8 @@ export default {
                 .then((result) => {
                     commit("SET_USER", result.data)
                     commit("UPDATE_TOKEN", result.data.token)
+                    localStorage.setItem('user',JSON.stringify(result.data))
+                    localStorage.setItem('token',JSON.stringify(result.data.token))
                     router.back()
                 })
                 .catch(console.error);
@@ -60,6 +62,8 @@ export default {
                 .then((result) => {
                     commit("SET_USER", result.data)
                     commit("UPDATE_TOKEN", result.data.token)
+                    localStorage.setItem('user',JSON.stringify(result.data))
+                    localStorage.setItem('token',JSON.stringify(result.data.token))
                     router.back()
                 })
                 .catch(console.error);
