@@ -40,7 +40,7 @@ const addCategory = async ()=>{
         Are you sure you want to remove this category?
       </div>
 
-      <div v-if="popType==='edit' || 'add'" class="my-[25px] font-bold flex flex-row">
+      <div v-if="popType==='edit' || popType==='add'" class="my-[25px] font-bold flex flex-row">
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
             Name
