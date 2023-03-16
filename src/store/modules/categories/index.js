@@ -63,6 +63,32 @@ export default {
                     console.log(result)
                 })
                 .catch(console.error);
+        },
+        async editCategory({state},category) {
+            await axios
+                .put(import.meta.env.VITE_CATEGORIES_URL + `/${state.category_id}`,category, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${store.getters['users/getToken']}`
+                    }
+                })
+                .then((result)=>{
+                    console.log(result)
+                })
+                .catch(console.error);
+        },
+        async AddCategory({state},category) {
+            await axios
+                .post(import.meta.env.VITE_CATEGORIES_URL,category, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": `Bearer ${store.getters['users/getToken']}`
+                    }
+                })
+                .then((result)=>{
+                    console.log(result)
+                })
+                .catch(console.error);
         }
     }
 }

@@ -40,7 +40,7 @@ const openPopup = (type)=>{
 
     <div class="flex justify-center px-[50px] py-[10px] h-[70px]">
       <div v-if="isHead" class="px-[42px]">
-        <button  class="btn btn-green ">Add</button>
+        <button  class="btn btn-green " @click="openPopup('add')">Add</button>
       </div>
       <div v-else class="flex">
         <button class="btn btn-orange" @click="openPopup('edit')">Edit</button>
