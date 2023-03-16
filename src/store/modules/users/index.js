@@ -6,7 +6,8 @@ export default {
     state() {
         return {
             user:null,
-            token: null
+            token: null,
+            profilePopup:false
 
         }
     },
@@ -17,6 +18,9 @@ export default {
         },
         UPDATE_TOKEN(state, token) {
             state.token = token
+        },
+        TOGGLE_PROFILE_POPUP(state){
+            state.profilePopup = !state.profilePopup
         }
 
     },
@@ -26,6 +30,9 @@ export default {
         },
         getUser(state){
             return state.user
+        },
+        getProfilePopup(state){
+            return state.profilePopup
         }
     },
     actions: {
@@ -67,6 +74,14 @@ export default {
                     router.back()
                 })
                 .catch(console.error);
+        },
+        logOut({commit}){
+            commit('TOGGLE_PROFILE_POPUP')
+            commit('SET_USER',null)
+            commit('UPDATE_TOKEN',null)
+            localStorage.removeItem('user')
+            localStorage.removeItem('token')
+            router.push('/')
         }
 
     }
